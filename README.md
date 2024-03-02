@@ -82,6 +82,30 @@ The alert message to be displayed if the OTP is not entered.
 />
 ```
 
+```
+allStyles = {
+  otpHolderStyle:{
+    ...// for otp input container
+  },
+  textStyle: {
+    ...// for input text
+  },
+  inputHolderStyle: {
+   ...// for single input holder
+  },
+  btnHolderStyle:{
+    ...// for button container
+  },
+  btnStyle:{
+    ...// for button
+  },
+  btnTextStyle:{
+    ...// for button text
+  }
+}
+```
+
+
 Feel free to customize the styles and behavior based on your application's requirements.
 
 ## License
