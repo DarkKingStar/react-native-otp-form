@@ -1,7 +1,7 @@
-###MIT License
+MIT License
 
 
-####Copyright (c) 2015-present, Facebook, Inc.
+Copyright (c) 2015-present, Facebook, Inc.
 
 
 - Permission is hereby granted, free of charge, to any person obtaining a copy
