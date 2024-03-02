@@ -8,11 +8,12 @@ import {OtpFormProps} from '../types';
 
 
 export const OtpForm: React.FC<OtpFormProps> = ({
-    setOtp,
+    onSubmit,
     otpSize, 
-    EmptyAlertMsg,
+    emptyAlertMsg,
     focusOnVisit=false,
     autoComplete=false,
+    autoSubmit=false,
     focusColor="#0cc",
     notFocusColor="#ccc",
     focusBorderColor="#0e0e0e",
@@ -26,7 +27,7 @@ export const OtpForm: React.FC<OtpFormProps> = ({
         justifyContent: 'space-between',
         alignItems: 'center',
       },
-      textStyle: {
+      inputTextStyle: {
         fontSize: 26,
         color: 'white',
         flex: 1,
@@ -55,7 +56,7 @@ export const OtpForm: React.FC<OtpFormProps> = ({
         borderWidth: 1,
         borderColor: 'blue',
       },
-      btnTextStyle:{
+      btninputTextStyle:{
         fontSize: 20,
         color: 'black'
       }
@@ -65,7 +66,7 @@ export const OtpForm: React.FC<OtpFormProps> = ({
     otp: yup
       .array()
       .of(yup.string().length(1).defined())
-      .required(EmptyAlertMsg),
+      .required(emptyAlertMsg),
   });
   const methods = useForm({
     resolver: yupResolver(otpSchema),
@@ -92,7 +93,14 @@ export const OtpForm: React.FC<OtpFormProps> = ({
         if (value && index < otpSize - 1) {
         inputRefs.current[index + 1].focus();
         }
+        else if (allDigitsFilled()  &&  autoSubmit) {
+          handleSubmit(onSubmit)();
+        }
     }
+  };
+  const allDigitsFilled = () => {
+    const values = getValues('otp');
+    return values.every((digit) => digit !== undefined && digit !== null && digit !== '');
   };
  
   const handleKeyPress = (event: any, index: number) => {
@@ -118,11 +126,7 @@ export const OtpForm: React.FC<OtpFormProps> = ({
     setFocusedInput(null);
   };
 
-  const onSubmit = async (data: any) => {
-      let otp = data.otp.toString();
-      otp = otp.replaceAll(',', '');
-      setOtp(otp);
-  };
+  
   return (
     <FormProvider {...methods}>
         <KeyboardAwareScrollView>
@@ -145,7 +149,7 @@ export const OtpForm: React.FC<OtpFormProps> = ({
                 },
               ]}>
               <TextInput
-                style={allStyles?.textStyle}
+                style={allStyles?.inputTextStyle}
                 keyboardType="numeric"
                 maxLength={1}
                 onKeyPress={({nativeEvent}) =>
@@ -172,7 +176,7 @@ export const OtpForm: React.FC<OtpFormProps> = ({
           <TouchableOpacity
             onPress={handleSubmit(onSubmit)}
             style={allStyles?.btnStyle}>
-            <Text style={allStyles?.btnTextStyle}>Verify</Text>
+            <Text style={allStyles?.btninputTextStyle}>Verify</Text>
           </TouchableOpacity>
         </View>
       </KeyboardAwareScrollView>

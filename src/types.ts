@@ -1,17 +1,24 @@
-import React from "react";
-import * as yup from 'yup';
+export type allStylesProps={
+  otpHolderStyle: any,
+  inputTextStyle:  any,
+  inputHolderStyle: any,
+  btnHolderStyle:any
+  btnStyle: any,
+  btninputTextStyle:any
+};
 
 export type OtpFormProps = {
-    setOtp: React.Dispatch<React.SetStateAction<string>>;
+    onSubmit: (data: any)=>{};
     otpSize: number;
-    EmptyAlertMsg: string;
+    emptyAlertMsg: string;
     focusOnVisit?: boolean;
     autoComplete?: boolean;
+    autoSubmit?: boolean;
     focusColor?: string;
     notFocusColor?: string;
     focusBorderColor?: string;
     notFocusBorderColor?: string;
     textVisibility?: boolean;
     selectionColor?: string;
-    allStyles?: any;
+    allStyles?: allStylesProps;
   };
