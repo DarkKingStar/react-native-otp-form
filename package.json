@@ -1,5 +1,5 @@
 {
-  "name": "react-native-otp-form",
+  "name": "react-native-otp-customized-form",
   "version": "0.0.1",
   "description": "react native otp form with yup validation",
   "main": "./dist/index.js",
